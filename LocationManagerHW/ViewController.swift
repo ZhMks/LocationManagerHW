@@ -18,6 +18,9 @@ class ViewController: UIViewController {
         map.layer.cornerRadius = 8.0
         map.showsUserLocation = true
         map.delegate = self
+        map.mapType = .mutedStandard
+        map.layer.borderColor = UIColor.systemGray3.cgColor
+        map.layer.borderWidth = 1.0
         let tapgest = UITapGestureRecognizer(target: self, action: #selector(setAnnotation(_:)))
         map.addGestureRecognizer(tapgest)
         return map
@@ -30,13 +33,16 @@ class ViewController: UIViewController {
         removeButton.layer.cornerRadius = 8.0
         removeButton.setTitle("Очистиить карту", for: .normal)
         removeButton.setTitleColor(.black, for: .normal)
+        removeButton.layer.shadowColor = UIColor.systemGray5.cgColor
+        removeButton.layer.shadowOffset = CGSize(width: 6, height: 6)
+        removeButton.layer.shadowOpacity = 0.8
         removeButton.addTarget(self, action: #selector(removeAnnotations(_:)), for: .touchUpInside)
         return removeButton
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        view.backgroundColor = .systemBackground
         view.addSubview(map)
         view.addSubview(removeButton)
         manager.delegate = self
